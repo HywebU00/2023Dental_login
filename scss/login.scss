@@ -1,0 +1,11 @@
+body {
+  background-color: #99d2d7;
+  font-size: 1em
+}
+
+.login{
+  input[type="text"],
+  input[type="password"]{
+    height: 3em; padding: 0 .5em;
+  }
+}
