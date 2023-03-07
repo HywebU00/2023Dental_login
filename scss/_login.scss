@@ -1,0 +1,313 @@
+// 長度變數
+$bdRadius: 16px;
+
+// RWD 斷點
+$wwNormal: 1000px;
+$wwMaximum: 1920px;
+
+body {
+  padding: 0; margin: 0;
+  background-color: $bodyBg;color: $fontColor;
+  font-size: 1em;font-family: 'Poppins', sans-serif;
+
+  &::before{
+    content: ''; position: fixed; left: 0;right: 0;top: 0;bottom: 0;
+  }
+  &.clinic{
+    &::before{
+      background-image: linear-gradient(144deg, $gc1 -20%, $gc2 120%);
+    }
+  }
+  
+  @media screen and (min-width: $wwNormal){
+    position: relative;
+    &::after{
+      content: ''; position: fixed; top: 50%; transform: translateY(-50%);
+    }
+    
+    //診所
+    &.clinic{
+      &::before{
+        content: ''; position: fixed; left: 0;right: 0;top: 0;bottom: 0;
+        background: url(../images/bodyBg-clinic.jpg) no-repeat center top 50%;
+        background-size: cover;
+      }
+  
+      &::after{
+        left: 37%; height: 62vh; width: 57%;
+        max-width: 1100px; max-height: 670px;
+        background: url(../images/clinicBg.png) no-repeat right center;
+        background-size: contain;
+      }
+    }
+
+    //資料庫
+    &.lab{
+      &::after{
+        content: ''; position: fixed;left: 37%; top: 50%;
+        top: 50%; transform: translateY(-50%);
+        height: 62vh; width: 57%;
+
+        background: url(../images/labBg.png) no-repeat right center;
+        background-size: contain;
+      }
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &.clinic{
+      &::after{
+        left: calc(50% - $wwMaximum*.13);
+      }
+    }
+  }
+
+}
+
+*{box-sizing: border-box;}
+
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+
+// 登入區 ////////////////////////////////////////
+.loginHere{
+  position: relative; z-index: 9;
+  margin: 0 auto;
+  width: 94%;max-width: 550px;
+
+  ////////////////////////////////////////////////
+  // form 元件 -----------------------------------
+  input{outline: none; transition: .2s; }
+  input[type="radio"], input[type="checkbox"] {
+    -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  }
+  input[type="text"],
+  input[type="password"] {
+    font-size: 1rem;
+    border: none;background: $white;
+    &:focus{
+      box-shadow: $inputFocus 0 0 0 3px;
+    }
+  }
+  input[type="checkbox"]{
+    position: relative;
+    width: 2em; height: 2em; vertical-align: middle;
+    margin: 0 .8em 0 2px;
+    border-radius: $bdRadius*.5;
+    border: none;
+    background: $white;
+    cursor: pointer;
+    &:focus{box-shadow: $buttonBg 0 0 0 2px; }
+
+    &:checked{
+      box-shadow:$white 0 0 0 2px;
+      background-color: $buttonBg;
+      &::before{ display: block;}
+    }
+    &::before{
+      display: none;
+      content: ''; 
+      position: absolute;width:.65em; height: 1.2em;
+      left: .5em; top: .06em;
+      border: 4px solid $white;
+      border-top: none; border-left: none;
+      border-radius: 1px;
+      transform: rotate(45deg);
+    }
+  }
+  ::placeholder {
+     color: $fontLight; font-size: .875em;
+  }
+  :-ms-input-placeholder {
+    color: $fontLight; font-size: .875em;
+  }
+  ::-ms-input-placeholder {
+    color: $fontLight; font-size: .875em;
+  }
+  button{
+    margin: 0;padding: 0;
+    border: none; background: none;
+    cursor: pointer;
+    transition: .2s;
+
+  }
+  button[class^="icon_"]{
+    border-radius: 50%;
+    transition: .2s;
+    &[class^="icon_"]{
+      &:hover, &:focus{
+        background-color: $iconHover;
+      }
+    }
+
+  }
+  ////////////////////////////////////////////////
+
+
+  &>header{
+    position: relative;
+    margin: 0 auto 20px;  text-align: center; color: $white;
+    h1{font-size: 2.5rem; margin: 0; padding-top: 1.5em;}
+  
+    img{
+     display: block; margin: 0 auto;
+    }
+  }
+
+  // 一組輸入欄位 //////////
+  .formRow{
+    margin: 5px auto 30px;
+    label{
+      display: block;margin: 0 0 .5em;line-height: 1.3;
+    }
+
+    // 帳號、密碼 //////////
+    &.id, &.pw{
+      position: relative;
+      input{ 
+        width: 100%; height: 4.8em; padding: 0 64px;
+        border-radius: $bdRadius;
+      }
+      &::before{
+        content: '';
+        position: absolute; left: 18px;
+        width: 32px; height: 32px;
+      }
+    }
+
+    &.id{
+      &::before{
+        bottom: calc(2.4em - 16px);
+        background: url(../images/icon_id.svg) no-repeat center center;
+        background-size: 24px auto;
+      }
+
+      label{ color: $white;}
+    }
+    &.pw{
+      margin-bottom: 20px;
+      &::before{
+        top: calc(2.4em - 16px);
+        background: url(../images/icon_pw.svg) no-repeat center center;
+        background-size: 24px auto;
+      }
+
+      // 顯示密碼的圖示
+      .icon_eye {
+        position: absolute; width: 56px; height: 56px;
+        top: calc(2.4em - 21px); right: 8px;
+        background:url(../images/icon_eye.svg) no-repeat center center;
+        background-size: 38px auto;
+      }
+    
+      p {
+        margin:14px 10px 0;
+        font-size: .875em;text-align: right;line-height: 1.1;
+        color: $hilight;
+      }
+    }
+
+    &.rememberMe{
+      label{
+        line-height: 1.5; cursor: pointer;
+      }
+    }
+  }
+
+
+  // 驗證碼 //////////
+  .captcha{
+    display: flex;
+    margin-top: 60px;
+    &>input{
+      flex: 1 1 60%; height: 56px; border-radius: 0;
+      padding: 0 .5em;
+    }
+    &>.captchaCode{
+      flex: 0 1 40%; margin: 0 0 0 10px;
+      background-color: $white;
+      
+      display: flex;
+      justify-content: space-between; align-items: center;
+
+      img{
+        height: 32px; width: 100px; object-fit: contain; margin-left: 8px;
+      }
+
+      .icon_regen{
+        width: 44px; height: 44px; margin:0 8px;
+        background: url(../images/icon_refresh.svg) no-repeat center center;
+        background-size: 22px;
+      }
+    }
+  }
+
+
+  // 登入按鈕 //////////
+  .butDv{
+    margin: 30px auto;
+    input[type="button"], input[type="submit"], button{
+      font-size: 1.5rem; height: 3.6em; line-height: 2.8;
+      background-color: $buttonBg; color: $white;
+      border: none; border-radius: $bdRadius; cursor: pointer;
+      &:only-child{
+        width: 100%;
+      }
+
+      &:focus{
+        box-shadow: $inputFocus 0 0 0 3px;
+      }
+    }
+  }
+
+
+  // Don't have an account 
+  .newAccount{
+    margin: 2.5em 0;
+    text-align: center;
+    a{
+      display: inline-block;
+      margin-left: 1em;
+      color: $white;
+    }
+  }
+
+
+  // Contact Us, Privacy Policy
+  .bottomLinks{
+    ul{
+      list-style: none; margin:3em 0 0; padding: 0;
+      text-align: center;
+      display: flex; justify-content: center;
+    }
+    li{
+      margin: 0 .7em;
+      a{
+        display: block;
+        color: $fontColor;
+      }
+    }
+  }
+
+  @media screen and (min-width: $wwNormal){
+    width: 28.65%; 
+    min-width: 440px; 
+    left: 9.35%; margin: 0 0 0 calc(2% - 38px);
+    top: 50vh; transform: translateY(-50%);
+
+    &>header{
+      h1{padding-top: 0;}
+    }
+
+  }
+
+
+  @media screen and (min-width: $wwMaximum){
+    margin-left: 0;
+    left : calc(50% - 780px);
+
+  }
+}
