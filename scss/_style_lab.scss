@@ -1,0 +1,28 @@
+// 實驗室
+body{
+  @media screen and (min-width: $wwNormal){
+    &::before{
+      background-image: url(../images/bodyBg-lab.jpg);
+    }
+    &::after{
+      right: 2.5%;left: 45%;
+      background: url(../images/labBg.svg) no-repeat center center;
+    }
+  }
+
+  @media screen and (min-width: 1310px){
+    &::after{
+      left: calc(550px + 3%);
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &::after{left:calc(50% - 202px);}
+  }
+
+  @media screen and (min-width: $wwBound){
+    &::after{
+      right: auto; width: 1110px;
+    }
+  }
+}

@@ -1,0 +1,25 @@
+// 平台
+body{
+  @media screen and (min-width: $wwNormal){
+    &::before{
+      background-image: url(../images/bodyBg-platform.jpg);
+    }
+    &::after{
+      left: 45%; width: 53%; max-width: 1034px;
+      background: url(../images/platformBg.svg) no-repeat left center;
+      background-size: contain;
+    }
+  }
+
+  @media screen and (min-width: 1390px){
+    &::after{
+      left: calc( 590px + 2.5%);
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &::after{
+      left: calc( 50% - 170px);
+    }
+  }
+}

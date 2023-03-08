@@ -1,70 +1,123 @@
-// 長度變數
-$bdRadius: 16px;
+// // 長度變數
+// $bdRadius: 16px;
 
-// RWD 斷點
-$wwNormal: 1000px;
-$wwMaximum: 1920px;
+// // RWD 斷點
+// $wwNormal: 1000px;
+// $wwMaximum: 1600px;
+// $wwBound: 1920px;
+
+a{ outline: none; }
 
 body {
   padding: 0; margin: 0;
   background-color: $bodyBg;color: $fontColor;
   font-size: 1em;font-family: 'Poppins', sans-serif;
-
   &::before{
     content: ''; position: fixed; left: 0;right: 0;top: 0;bottom: 0;
+    background-image: linear-gradient(150deg, $gc1 0%, $gc2 120%);
   }
-  &.clinic{
-    &::before{
-      background-image: linear-gradient(144deg, $gc1 -20%, $gc2 120%);
-    }
-  }
+
+  *{box-sizing: border-box;}
   
   @media screen and (min-width: $wwNormal){
     position: relative;
+    &::before{
+      background-repeat: no-repeat;
+      background-position: center top 50%;
+      background-size: cover;
+    }
     &::after{
-      content: ''; position: fixed; top: 50%; transform: translateY(-50%);
-    }
-    
-    //診所
-    &.clinic{
-      &::before{
-        content: ''; position: fixed; left: 0;right: 0;top: 0;bottom: 0;
-        background: url(../images/bodyBg-clinic.jpg) no-repeat center top 50%;
-        background-size: cover;
-      }
-  
-      &::after{
-        left: 37%; height: 62vh; width: 57%;
-        max-width: 1100px; max-height: 670px;
-        background: url(../images/clinicBg.png) no-repeat right center;
-        background-size: contain;
-      }
-    }
-
-    //資料庫
-    &.lab{
-      &::after{
-        content: ''; position: fixed;left: 37%; top: 50%;
-        top: 50%; transform: translateY(-50%);
-        height: 62vh; width: 57%;
-
-        background: url(../images/labBg.png) no-repeat right center;
-        background-size: contain;
-      }
-    }
-  }
-
-  @media screen and (min-width: $wwMaximum){
-    &.clinic{
-      &::after{
-        left: calc(50% - $wwMaximum*.13);
-      }
+      content: ''; position: fixed; 
+      height: 90vh; top: 50%; transform: translateY(-50%);
+      background-repeat: no-repeat;
+      background-size: contain;
     }
   }
 
 }
 
-*{box-sizing: border-box;}
+// 診所
+body.clinic{
+  
+  @media screen and (min-width: $wwNormal){
+    &::before{
+      background-image: url(../images/bodyBg-clinic.jpg);
+    }
+  
+    &::after{
+      left: 42%;width: 56%;
+      // max-width: 1100px; 
+      // max-height: 670px;
+      background: url(../images/clinicBg.svg) no-repeat right center;
+    }
+  }
+
+  @media screen and (min-width: 1310px){
+    &::after{
+      left: calc(500px + 4%); width: auto; right: 2%;
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &::after{left: calc(50% - 236px); max-width: 1100px;}
+
+  }
+}
+
+// 實驗室
+body.lab{
+  @media screen and (min-width: $wwNormal){
+    &::before{
+      background-image: url(../images/bodyBg-lab.jpg);
+    }
+    &::after{
+      right: 2.5%;left: 45%;
+      background: url(../images/labBg.svg) no-repeat center center;
+    }
+  }
+
+  @media screen and (min-width: 1310px){
+    &::after{
+      left: calc(550px + 3%);
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &::after{left:calc(50% - 202px);}
+  }
+
+  @media screen and (min-width: $wwBound){
+    &::after{
+      right: auto; width: 1110px;
+    }
+  }
+}
+
+// 平台
+body.platform{
+  @media screen and (min-width: $wwNormal){
+    &::before{
+      background-image: url(../images/bodyBg-platform.jpg);
+    }
+    &::after{
+      left: 45%; width: 53%; max-width: 1034px;
+      background: url(../images/platformBg.svg) no-repeat left center;
+      background-size: contain;
+    }
+  }
+
+  @media screen and (min-width: 1390px){
+    &::after{
+      left: calc( 590px + 2.5%);
+    }
+  }
+
+  @media screen and (min-width: $wwMaximum){
+    &::after{
+      left: calc( 50% - 170px);
+    }
+  }
+}
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -129,9 +182,8 @@ body {
   }
   button{
     margin: 0;padding: 0;
-    border: none; background: none;
-    cursor: pointer;
-    transition: .2s;
+    border: none; background: none; outline: none;
+    cursor: pointer; transition: .2s;
 
   }
   button[class^="icon_"]{
@@ -147,6 +199,7 @@ body {
   ////////////////////////////////////////////////
 
 
+  // 大標題
   &>header{
     position: relative;
     margin: 0 auto 20px;  text-align: center; color: $white;
@@ -203,16 +256,38 @@ body {
         background-size: 38px auto;
       }
     
+      // 忘記密碼
       p {
         margin:14px 10px 0;
         font-size: .875em;text-align: right;line-height: 1.1;
-        color: $hilight;
+        color: $error;
+        a{
+          display: inline-block; position: relative;
+          padding: 0 0 3px;
+          color: $error; text-decoration: none;
+
+          &::after{
+            content: '';
+            position: absolute; left: 0;right: 0; bottom: 0;
+            height: 1px; background-color: transparent;
+          }
+
+          &:hover, &:focus{
+            &::after{
+              background-color: $error;
+            }
+          }
+        }
       }
     }
 
+    // 記住我
     &.rememberMe{
       label{
         line-height: 1.5; cursor: pointer;
+        input{
+          margin-top: -.1em;
+        }
       }
     }
   }
@@ -253,25 +328,38 @@ body {
       font-size: 1.5rem; height: 3.6em; line-height: 2.8;
       background-color: $buttonBg; color: $white;
       border: none; border-radius: $bdRadius; cursor: pointer;
-      &:only-child{
-        width: 100%;
-      }
+      &:only-child{width: 100%;}
 
-      &:focus{
-        box-shadow: $inputFocus 0 0 0 3px;
-      }
+      &:hover, &:focus{background-color: $buttonPressed;}
+      &:focus{box-shadow: $buttonPressed 0 0 0 3px;}
     }
   }
 
 
+  // 底部資訊
+  .newAccount, .bottomLinks{
+    a{
+      position: relative;text-decoration: none;
+      &::after{
+        content: ''; position: absolute; left: 0;right: 0; bottom: 0;
+        height: 1px;
+      }
+
+      &:hover, &:focus{
+        &::after{
+          height: 2px;
+        }
+      }
+    }
+  }
   // Don't have an account 
   .newAccount{
-    margin: 2.5em 0;
-    text-align: center;
+    margin: 2.5em 0; text-align: center; line-height: 1.5;
     a{
-      display: inline-block;
-      margin-left: 1em;
-      color: $white;
+      display: inline-block; margin-left: 1em; color: $white;
+      &::after{
+        background-color: $white;
+      }
     }
   }
 
@@ -280,34 +368,40 @@ body {
   .bottomLinks{
     ul{
       list-style: none; margin:3em 0 0; padding: 0;
-      text-align: center;
+      text-align: center;line-height: 1.5;
       display: flex; justify-content: center;
     }
     li{
       margin: 0 .7em;
       a{
-        display: block;
-        color: $fontColor;
+        display: block;color: $fontColor;
+        &::after{
+          background-color: $fontColor;
+        }
+  
       }
     }
   }
 
   @media screen and (min-width: $wwNormal){
-    width: 28.65%; 
-    min-width: 440px; 
-    left: 9.35%; margin: 0 0 0 calc(2% - 38px);
     top: 50vh; transform: translateY(-50%);
+    width: 42%; margin: 0;
+    left:2.5%; 
+    
+
+    // &::before{
+    //   content: ''; position: fixed; top: 0;bottom: 0; left: 50vw; right: 50vw;
+    //   width: 1px; background-color: #cf0;
+    // }
 
     &>header{
       h1{padding-top: 0;}
     }
-
   }
 
 
-  @media screen and (min-width: $wwMaximum){
-    margin-left: 0;
-    left : calc(50% - 780px);
 
+  @media screen and (min-width: $wwMaximum){
+    left: calc(50% - 760px)
   }
 }
