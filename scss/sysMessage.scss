@@ -1,45 +1,93 @@
-a{ outline: none; }
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+// 404, 505 顏色變數
+$bodyBg: #F8FAFC;
+$buttonBg: #2B90DC;
+$buttonPressed: #096DD9;
+$fontColor: #959595;
+$fontDark: #000;
+
+$white: #fff;
+$gc1: #2B90DC;
+$gc2: #22D9CE;
+// RWD 斷點
+$wwNormal: 1000px;
+// ---------------------
 
 body {
   padding: 0; margin: 0;
-  background-color: $bodyBg;color: $fontColor;
-  font-size: 1em;font-family: 'Poppins', sans-serif;
-  &::before{
-    content: ''; position: fixed; left: 0;right: 0;top: 0;bottom: 0;
-    background-image: linear-gradient(150deg, $gc1 0%, $gc2 120%);
-  }
-
-*{box-sizing: border-box;}
-
-.button{
-  display: inline-block;
-  a{
-    display: block; height: 3em; line-height: 3;
-    padding: 0 1em; min-width: 10em;
-    border-radius: 2em;
-    background: #eee;
-  }
+  font-size: 1em;
+  font-family: "Poppins", "Noto Sans TC", "Microsoft JhengHei", PingFang, STHeiti, sans-serif, serif;
+  color: $fontColor; background-color: $bodyBg;
+  *{box-sizing: border-box;}
 }
 
-.msgPage{
-  margin: 30px auto;
-  width: 88%; max-width: 900px;
-  text-align: center;
-  
-  outline: 1px dashed #bbb;
+a{ outline: none; }
 
-  hgroup{
-    margin: 1rem auto;
+////////////////////////////////////////////////////////////
+
+// 元件庫 -------------------------------------------------
+.button{
+  display: inline-block; font-size: 1.125em;
+  a{
+    display: block; height: 2.5em; line-height: 2.5;
+    padding: 0 1em; min-width: 9.5em; margin: 5px 10px;
+    border-radius: 2em;
+    background: $white; color: $fontDark;
+    box-shadow: $buttonBg 0 0 0 1px;
+    text-decoration: none;
+    transition: .15s;
+    &:hover, &:focus{
+      box-shadow: $buttonBg 0 0 0 2px;
+    }
+    &:focus {
+      background-color: $buttonBg; color: $white;
+    }
   }
+}
+// ----------------------------------------------------------
+
+
+// 訊息區
+.sysMessage{
+  position: relative;
+  width: 96%; margin:0 auto;padding:80px 20px;
+  max-width: 960px;
+  top: 50vh; transform: translateY(-50%);
+  text-align: center;
+  color: $fontColor; background-color: $white;
+  border-radius: 20px;
+  box-shadow: rgba(0,0,0,.15) 0 0 16px;
+  
   h1{
-    font-size: 8em; line-height: 1.3;
+    margin: 0 auto;
+    font-size: 8em; line-height: 1.1; font-weight: 700;
+    color: $gc1;
+    background: linear-gradient($gc1 10%, $gc2 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
   h2{
-    font-size: 2.5em; line-height: 1.3;
+    margin: .2em auto 1em;
+    font-size: 2.5em; line-height: 1.3; font-weight: 600; 
+    color: $fontDark;
+  }
+
+  p{
+    line-height: 1.4; margin: 0; font-size: 1.5em;
+    font-weight: 700;
+    &+p{ margin-top: .8em; }
   }
 
   .btnDv{
-    display: flex; flex-flow: row wrap;
+    display: flex; flex-flow: row wrap; justify-content: center;
+    margin: 3em auto 0;
   }
+
+
+  @media screen and (min-width: $wwNormal){
+    padding:120px 40px;
+  }
+
 
 }
