@@ -168,6 +168,10 @@ a{ outline: none; }
       top: calc(2.4em - 21px); right: 8px;
       background:url(../images/icon_eye.svg) no-repeat center center;
       background-size: 38px auto;
+
+      &.hide {
+        background-image: url(../images/icon_eyeHide.svg);
+      }
     }
   
     // 忘記密碼
